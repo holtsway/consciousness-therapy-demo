@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consciousness Therapy Platform - Interactive Demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            padding: 40px 0;
+        }
+        
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.3em;
+            opacity: 0.9;
+        }
+        
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .demo-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        .demo-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .demo-card h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+        
+        .demo-section {
+            margin: 20px 0;
+        }
+        
+        .demo-section h3 {
+            color: #764ba2;
+            margin-bottom: 10px;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 18px;
+            cursor: pointer;
+            width: 100%;
+            margin: 10px 0;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        .result-box {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #667eea;
+        }
+        
+        .consciousness-metrics {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin: 15px 0;
+        }
+        
+        .metric {
+            background: #e8f0fe;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .metric-value {
+            font-size: 2em;
+            color: #667eea;
+            font-weight: bold;
+        }
+        
+        .metric-label {
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+        
+        .smart-home-env {
+            background: #f0f7ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .env-setting {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 10px 0;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+        }
+        
+        .price-display {
+            font-size: 3em;
+            color: #667eea;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .cultural-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 15px 0;
+        }
+        
+        .cultural-tag {
+            background: #e8f0fe;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .cultural-tag:hover, .cultural-tag.selected {
+            background: #667eea;
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .demo-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧠 Consciousness Therapy Platform</h1>
+            <p>Revolutionary AI-Assisted Mental Health with Global Accessibility</p>
+        </div>
+
+        <div class="demo-grid">
+            <!-- Client Experience Demo -->
+            <div class="demo-card">
+                <h2>👤 Client Experience</h2>
+                
+                <div class="demo-section">
+                    <h3>Voice-First Emotional Check-In</h3>
+                    <textarea id="emotional-expression" placeholder="How are you feeling today? (Speak or type naturally...)" rows="3"></textarea>
+                    
+                    <select id="cultural-background">
+                        <option value="general">General/Western</option>
+                        <option value="latino_hispanic">Latino/Hispanic</option>
+                        <option value="east_asian">East Asian</option>
+                        <option value="indigenous">Indigenous</option>
+                        <option value="african_american">African American</option>
+                        <option value="south_asian">South Asian</option>
+                    </select>
+                    
+                    <button onclick="processEmotionalCheckIn()">🎤 Process Check-In</button>
+                </div>
+                
+                <div id="ai-response" class="result-box" style="display:none;">
+                    <h4>🧠 Consciousness-Informed Therapeutic Response</h4>
+                    <p id="therapeutic-response"></p>
+                    
+                    <div class="consciousness-metrics">
+                        <div class="metric">
+                            <div class="metric-value" id="presence-score">0.85</div>
+                            <div class="metric-label">Present Moment</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value" id="harmony-score">0.72</div>
+                            <div class="metric-label">Emotional Balance</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="demo-section">
+                    <h3>💰 Sliding Scale Pricing</h3>
+                    <label>Your Location:</label>
+                    <select id="location" onchange="updatePricing()">
+                        <option value="us">United States</option>
+                        <option value="india">India</option>
+                        <option value="brazil">Brazil</option>
+                        <option value="kenya">Kenya</option>
+                        <option value="philippines">Philippines</option>
+                    </select>
+                    
+                    <label>Income Level:</label>
+                    <select id="income" onchange="updatePricing()">
+                        <option value="very-low">Very Low Income</option>
+                        <option value="low">Low Income</option>
+                        <option value="middle">Middle Income</option>
+                        <option value="high">High Income</option>
+                    </select>
+                    
+                    <div class="price-display" id="session-price">$15</div>
+                    <p style="text-align:center; color:#666;">Per 50-minute session</p>
+                </div>
+            </div>
+
+            <!-- Clinician Experience Demo -->
+            <div class="demo-card">
+                <h2>👩‍⚕️ Clinician Dashboard</h2>
+                
+                <div class="demo-section">
+                    <h3>Professional Profile (Sue's Example)</h3>
+                    <div class="result-box">
+                        <p><strong>License:</strong> PSY123456 ✅ Verified</p>
+                        <p><strong>Experience:</strong> 30 years</p>
+                        <p><strong>Specialties:</strong> Trauma, Anxiety, Consciousness-Informed</p>
+                        <p><strong>Cultural Competencies:</strong> Multicultural, LGBTQ+</p>
+                        <p><strong>Revenue Share:</strong> 85% (vs 50-70% traditional)</p>
+                    </div>
+                </div>
+                
+                <div class="demo-section">
+                    <h3>📊 Practice Analytics</h3>
+                    <div class="consciousness-metrics">
+                        <div class="metric">
+                            <div class="metric-value">127</div>
+                            <div class="metric-label">Global Clients</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">4.8</div>
+                            <div class="metric-label">Client Rating</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">89%</div>
+                            <div class="metric-label">Outcome Success</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">$18.5k</div>
+                            <div class="metric-label">Monthly Income</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="demo-section">
+                    <h3>🌍 Client Distribution</h3>
+                    <div class="cultural-options">
+                        <div class="cultural-tag selected">USA (34)</div>
+                        <div class="cultural-tag selected">India (28)</div>
+                        <div class="cultural-tag selected">Brazil (19)</div>
+                        <div class="cultural-tag selected">Kenya (15)</div>
+                        <div class="cultural-tag selected">Philippines (12)</div>
+                        <div class="cultural-tag selected">Mexico (11)</div>
+                        <div class="cultural-tag selected">Canada (8)</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Smart Home Integration Demo -->
+            <div class="demo-card">
+                <h2>🏠 Smart Home Therapy Integration</h2>
+                
+                <div class="demo-section">
+                    <h3>Environmental Therapy Support</h3>
+                    <select id="therapy-need" onchange="updateEnvironment()">
+                        <option value="anxiety">Anxiety Support</option>
+                        <option value="depression">Depression Lifting</option>
+                        <option value="trauma">Trauma Safety</option>
+                        <option value="family">Family Connection</option>
+                    </select>
+                    
+                    <div class="smart-home-env" id="environment-settings">
+                        <h4>🎛️ Optimized Environment</h4>
+                        <div class="env-setting">
+                            <span>💡 Lighting</span>
+                            <span id="lighting-setting">Soft Warm 3000K</span>
+                        </div>
+                        <div class="env-setting">
+                            <span>🌡️ Temperature</span>
+                            <span id="temp-setting">68°F</span>
+                        </div>
+                        <div class="env-setting">
+                            <span>🔊 Sound</span>
+                            <span id="sound-setting">Nature Sounds</span>
+                        </div>
+                        <div class="env-setting">
+                            <span>⏱️ Duration</span>
+                            <span>30-60 minutes</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="demo-section">
+                    <h3>📱 Between-Session Support</h3>
+                    <button onclick="scheduleAffirmation()">🔔 Schedule Daily Affirmation</button>
+                    <button onclick="triggerEnvironment()">🏠 Activate Therapy Environment</button>
+                    <div id="smart-home-status" class="result-box" style="display:none; margin-top:15px;">
+                        <p>✅ <span id="status-message"></span></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Global Impact Demo -->
+            <div class="demo-card">
+                <h2>🌍 Global Impact & Scale</h2>
+                
+                <div class="demo-section">
+                    <h3>Platform Metrics</h3>
+                    <div class="consciousness-metrics">
+                        <div class="metric">
+                            <div class="metric-value">4B+</div>
+                            <div class="metric-label">Potential Reach</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">50+</div>
+                            <div class="metric-label">Languages</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">24/7</div>
+                            <div class="metric-label">Crisis Support</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">$1-150</div>
+                            <div class="metric-label">Price Range</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="demo-section">
+                    <h3>🧠 Consciousness Integration</h3>
+                    <div class="result-box">
+                        <p>✨ <strong>Present-Moment Awareness:</strong> AI preserves mindfulness</p>
+                        <p>🏠 <strong>Smart Home Support:</strong> Environmental therapy activation</p>
+                        <p>👨‍👩‍👧‍👦 <strong>Family Harmony:</strong> Relationship consciousness optimization</p>
+                        <p>🌊 <strong>Flow State Therapy:</strong> Natural timing, not forced</p>
+                        <p>💚 <strong>CCP Integration:</strong> Earn consciousness points for progress</p>
+                    </div>
+                </div>
+                
+                <div class="demo-section">
+                    <h3>📈 Revolutionary Features</h3>
+                    <div class="result-box">
+                        <p>🔒 <strong>True Privacy:</strong> Client data sovereignty on blockchain</p>
+                        <p>🌍 <strong>Cultural Preservation:</strong> Indigenous healing wisdom honored</p>
+                        <p>👩‍⚕️ <strong>Professional Empowerment:</strong> 85% revenue to clinicians</p>
+                        <p>🚨 <strong>Crisis Prevention:</strong> AI early detection + human backup</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Demo functionality
+        function processEmotionalCheckIn() {
+            const expression = document.getElementById('emotional-expression').value;
+            const culture = document.getElementById('cultural-background').value;
+            
+            // Simulate AI response
+            const responses = {
+                general: "I hear that you're experiencing some challenging emotions right now. Let's take a moment to ground ourselves in the present. Take three conscious breaths with me. Notice that in this moment, you are safe. What is this feeling trying to teach you about your needs or values?",
+                latino_hispanic: "Escucho que estás pasando por emociones difíciles. Vamos a tomar un momento para centrarnos en el presente. Respira conmigo tres veces conscientemente. Tu familia y comunidad son fuentes de fortaleza. ¿Qué te está enseñando este sentimiento sobre tus necesidades?",
+                east_asian: "I understand you're experiencing difficult emotions. Let's find balance together through mindful breathing. In this moment, you are whole and complete. Consider what this feeling reveals about maintaining harmony in your life.",
+                indigenous: "I hear your spirit speaking through these emotions. Let's connect with the ground beneath us and the breath within us. You are part of the great web of life. What medicine is this experience offering for your journey?",
+                african_american: "I hear you and what you're going through is real. Let's take a moment to center ourselves in our strength. Breathe with me and remember your resilience. Your ancestors' wisdom flows through you. What is this teaching you about your power?"
+            };
+            
+            document.getElementById('therapeutic-response').innerText = 
+                responses[culture] || responses.general;
+            
+            document.getElementById('ai-response').style.display = 'block';
+            
+            // Update consciousness metrics
+            document.getElementById('presence-score').innerText = 
+                (0.7 + Math.random() * 0.3).toFixed(2);
+            document.getElementById('harmony-score').innerText = 
+                (0.6 + Math.random() * 0.4).toFixed(2);
+        }
+        
+        function updatePricing() {
+            const location = document.getElementById('location').value;
+            const income = document.getElementById('income').value;
+            
+            const basePrices = {
+                us: 150,
+                india: 20,
+                brazil: 30,
+                kenya: 15,
+                philippines: 25
+            };
+            
+            const incomeMultipliers = {
+                'very-low': 0.1,
+                'low': 0.25,
+                'middle': 0.75,
+                'high': 1.0
+            };
+            
+            const basePrice = basePrices[location] || 50;
+            const multiplier = incomeMultipliers[income] || 0.5;
+            const finalPrice = Math.max(1, Math.round(basePrice * multiplier));
+            
+            document.getElementById('session-price').innerText = `$${finalPrice}`;
+        }
+        
+        function updateEnvironment() {
+            const need = document.getElementById('therapy-need').value;
+            
+            const environments = {
+                anxiety: {
+                    lighting: 'Soft Warm 3000K',
+                    temp: '68°F',
+                    sound: 'Nature Sounds'
+                },
+                depression: {
+                    lighting: 'Bright Full Spectrum 6500K',
+                    temp: '74°F',
+                    sound: 'Uplifting Music'
+                },
+                trauma: {
+                    lighting: 'Gentle Controllable',
+                    temp: '70°F',
+                    sound: 'Consistent White Noise'
+                },
+                family: {
+                    lighting: 'Warm Connecting 3500K',
+                    temp: '73°F',
+                    sound: 'Soft Background'
+                }
+            };
+            
+            const env = environments[need];
+            document.getElementById('lighting-setting').innerText = env.lighting;
+            document.getElementById('temp-setting').innerText = env.temp;
+            document.getElementById('sound-setting').innerText = env.sound;
+        }
+        
+        function scheduleAffirmation() {
+            document.getElementById('smart-home-status').style.display = 'block';
+            document.getElementById('status-message').innerText = 
+                'Daily consciousness affirmation scheduled for 9:00 AM. Your smart home will optimize environment for mindful moment.';
+        }
+        
+        function triggerEnvironment() {
+            document.getElementById('smart-home-status').style.display = 'block';
+            document.getElementById('status-message').innerText = 
+                'Therapy environment activated! Lights adjusting, temperature optimizing, calming sounds beginning. Space prepared for healing.';
+        }
+    </script>
+</body>
+</html>
